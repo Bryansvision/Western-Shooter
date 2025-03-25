@@ -11,6 +11,7 @@ public class WiimoteDemo : MonoBehaviour {
     public RectTransform[] ir_dots;
     public RectTransform[] ir_bb;
     public RectTransform ir_pointer;
+    private static GameObject instance;
 
     private Quaternion initial_rotation;
 
@@ -22,6 +23,15 @@ public class WiimoteDemo : MonoBehaviour {
 
     void Start() {
         initial_rotation = model.rot.localRotation;
+        if (instance == null)
+        {
+            instance = this.gameObject;
+            UnityEngine.Object.DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 	void Update () {

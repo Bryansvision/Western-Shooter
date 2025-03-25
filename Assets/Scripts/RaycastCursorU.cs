@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RaycastCursorU : MonoBehaviour
@@ -16,13 +18,25 @@ public class RaycastCursorU : MonoBehaviour
 
     void Start()
     {
-        theCamera = Camera.main;
+        SceneManager.sceneLoaded += startSwitch;
         miiScore = FindFirstObjectByType<MIInemumScore>();
-        WIImote = FindFirstObjectByType<TESTMII>(); 
+        WIImote = FindFirstObjectByType<TESTMII>();
     }
+
+    void startSwitch(Scene scene, LoadSceneMode mode)
+    {
+        miiScore = FindFirstObjectByType<MIInemumScore>();
+        WIImote = FindFirstObjectByType<TESTMII>();
+        Ammo = 4;
+    }
+
+  
+    
 
     void Update()
     {
+
+        theCamera = Camera.main;
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = 100f;
         mousePosition = theCamera.ScreenToWorldPoint(mousePosition);
@@ -50,7 +64,14 @@ public class RaycastCursorU : MonoBehaviour
                     miiScore.currentScore += 1;
                     miiScore.targetsLeft -= 1;
                     miiScore.readyToFire = true;
-                }else if(hit.collider.tag == ("Button"))
+                    if (hit.transform.parent != null)
+                    {
+                        Destroy(hit.transform.parent.gameObject);
+                    }
+
+
+                }
+                else if(hit.collider.tag == ("Button") || hit.collider.tag == ("ContinueButton"))
                 {
                     selectedButton = hit.collider.gameObject.GetComponent<Button>();
                     selectedButton.onClick.Invoke();
@@ -67,6 +88,7 @@ public class RaycastCursorU : MonoBehaviour
             cooldown--;
         }
 
+     
        
     
     }

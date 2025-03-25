@@ -14,19 +14,28 @@ public class TESTMII : MonoBehaviour
     public float motion;
     public float[] pointer;
     public bool Failsafe = false;
+    private static GameObject instance;
+    private float offset = 2000;
 
     void Start()
     {
-        StartCoroutine(activate());
-        WiimoteManager.FindWiimotes();
-        mote = WiimoteManager.Wiimotes[0];
-        mote.SendPlayerLED(true,true,true,true);
-        mote.SendDataReportMode(InputDataType.REPORT_BUTTONS_ACCEL_EXT16);
-        mote.Accel.CalibrateAccel(AccelCalibrationStep.A_BUTTON_UP);
-        mote.SetupIRCamera(IRDataType.BASIC);
-        mote.Ir.GetProbableSensorBarIR();
-       
-       
+        if(instance == null)
+        {
+            instance = this.gameObject;
+            Object.DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+            StartCoroutine(activate());
+            WiimoteManager.FindWiimotes();
+            mote = WiimoteManager.Wiimotes[0];
+            mote.SendPlayerLED(true, true, true, true);
+            mote.SendDataReportMode(InputDataType.REPORT_BUTTONS_ACCEL_EXT16);
+            mote.Accel.CalibrateAccel(AccelCalibrationStep.A_BUTTON_UP);
+            mote.SetupIRCamera(IRDataType.BASIC);
+            mote.Ir.GetProbableSensorBarIR();
     }
 
    
@@ -58,12 +67,11 @@ public class TESTMII : MonoBehaviour
             
             }
 
-
              pointer = mote.Ir.GetPointingPosition();
 
             if (Failsafe)
             {
-                Mouse.current.WarpCursorPosition(new Vector2(-pointer[1] * 2000 + Screen.width, pointer[0] * 2000));
+                CallibratePointer();
             }
 
 
@@ -79,6 +87,11 @@ public class TESTMII : MonoBehaviour
         }
        
 
+    }
+
+    public void CallibratePointer()
+    {
+        Mouse.current.WarpCursorPosition(new Vector2(-pointer[1] * offset + Screen.width, pointer[0] * offset));
     }
 
     public IEnumerator activate()

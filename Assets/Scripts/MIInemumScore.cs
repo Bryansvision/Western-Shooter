@@ -2,6 +2,8 @@ using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SocialPlatforms.Impl;
+using System.Linq;
 
 public class MIInemumScore : MonoBehaviour
 {
@@ -16,10 +18,13 @@ public class MIInemumScore : MonoBehaviour
     public bool readyToFire;
     public GameObject winScreen;
     private bool wereDone = true;
+    private GameObject[] currentTargets;
+    [SerializeField] private GameObject continueButton;
 
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI result;
     [SerializeField] TextMeshProUGUI ammunition;
+    [SerializeField] TextMeshProUGUI passed;
 
     [System.Obsolete]
     void Start()
@@ -28,6 +33,7 @@ public class MIInemumScore : MonoBehaviour
 
        spawnerScripts = FindObjectsOfType(typeof(spawnerScript)) as spawnerScript[];
        levelTracker = GameObject.FindGameObjectWithTag("LevelTracker");
+       continueButton.SetActive(false);
        trackerName = levelTracker.name;
        currentScore = 0;
        stageMinimum = 10;
@@ -58,12 +64,24 @@ public class MIInemumScore : MonoBehaviour
             activeScript.spawnAnItem();
         }
 
+        if(currentScore >= stageMinimum)
+        {
+            passed.text = "congrats you beat the minimum you can move on !";
+            continueButton.SetActive(true);
+        }else
+        {
+            passed.text = "to bad you didnt meet the minimum go on try again";
+        }
        
 
         if (targetsLeft <= 0)
         {
             winScreen.gameObject.SetActive(true);
             wereDone = false;
+            currentTargets = GameObject.FindGameObjectsWithTag("Target");
+            for (int i = 0; i < currentTargets.Length; i++) {
+              Destroy(currentTargets[i]);   
+            }
         }
     }
 }
