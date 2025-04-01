@@ -17,5 +17,25 @@ public class Buttonlogic : MonoBehaviour
     public void SendtoTitle()
     {
         SceneManager.LoadScene(1);
+        
+    }
+
+    public void Sendtolvl2()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void Sendtolvl3()
+    {
+        SceneManager.LoadScene(5);
+    }
+
+    public void sendtoEnd()
+    {
+        SceneManager.LoadScene(6);
+    }
+    public void retry()
+    {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

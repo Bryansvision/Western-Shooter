@@ -9,6 +9,7 @@ public class SecondTarget : BaseTarget
     private Vector3 myPosition;
     private Vector3 myDestination;
     private float perc;
+    public bool otherway = false;
     private Animator plateAnimator;
     public MIInemumScore gameManager;
     
@@ -26,13 +27,24 @@ public class SecondTarget : BaseTarget
 
         if (selectedBehaviour == 1)
         {
-            plateAnimator.SetBool("Behaviour1", true);  
-            myDestination.x -= 70;
+            plateAnimator.SetBool("Behaviour1", true);
+            if (!otherway)
+            {
+                myDestination.x -= 70;
+            }else if (otherway)
+            {
+                myDestination.x += 70;
+            }
         }
         else if (selectedBehaviour == 2) {
             plateAnimator.SetBool("Behaviour2",true);
-            myDestination.x -= 70;
-            myDestination.y -= 10;
+            if (!otherway) {
+                myDestination.x -= 70;
+                myDestination.y -= 10;
+            }  else if (otherway) {
+                myDestination.x += 70;
+                myDestination.y -= 10;
+            }
         }
     }
 
@@ -45,7 +57,14 @@ public class SecondTarget : BaseTarget
 
         while (perc < 1)
         {
-            perc += Time.deltaTime / 2.5f;
+            if (gameManager.slowDown == true)
+            {
+                perc += Time.deltaTime / 4.5f;
+            }
+            else
+            {
+                perc += Time.deltaTime / 2.5f;
+            }
             gameObject.transform.position = Vector3.Lerp(myPosition, myDestination, perc);
             yield return new WaitForEndOfFrame();
 

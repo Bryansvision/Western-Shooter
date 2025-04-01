@@ -14,6 +14,8 @@ public class RaycastCursorU : MonoBehaviour
     public TESTMII WIImote;
     public int Ammo = 4;
     private float cooldown;
+    public GameObject explode;
+    private GameObject explodingInstance;
     [SerializeField] private Button selectedButton;
 
     void Start()
@@ -64,6 +66,7 @@ public class RaycastCursorU : MonoBehaviour
                     miiScore.currentScore += 1;
                     miiScore.targetsLeft -= 1;
                     miiScore.readyToFire = true;
+                    explodingInstance = Instantiate(explode,hit.transform.position,Quaternion.identity);
                     if (hit.transform.parent != null)
                     {
                         Destroy(hit.transform.parent.gameObject);

@@ -19,6 +19,7 @@ public class MIInemumScore : MonoBehaviour
     public GameObject winScreen;
     private bool wereDone = true;
     private GameObject[] currentTargets;
+    public bool slowDown = false;
     [SerializeField] private GameObject continueButton;
 
     [SerializeField] TextMeshProUGUI text;
@@ -44,6 +45,17 @@ public class MIInemumScore : MonoBehaviour
             case "TestLevel":
                 stageMinimum = 10;
                 targetsLeft = 15;
+                slowDown = false;
+                break;
+            case "Level2":
+                stageMinimum = 15;
+                targetsLeft = 18;
+                slowDown = false;
+                break;
+            case "Level3":
+                stageMinimum = 20;
+                targetsLeft = 22;
+                slowDown = true;
                 break;
 
         }
