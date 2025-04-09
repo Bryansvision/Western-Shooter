@@ -57,7 +57,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBehaviour: 0
+  myDeathSound: {fileID: 0}
   gameManager: {fileID: 0}
+  bottleAnimator: {fileID: 0}
 --- !u!23 &8349630664763990711
 MeshRenderer:
   m_ObjectHideFlags: 0

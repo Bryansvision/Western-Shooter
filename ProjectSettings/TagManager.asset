@@ -9,6 +9,7 @@ TagManager:
   - LevelTracker
   - Button
   - ContinueButton
+  - FlashBoom
   layers:
   - Default
   - TransparentFX

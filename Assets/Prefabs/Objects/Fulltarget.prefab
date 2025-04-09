@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   flippingAnimator: {fileID: 0}
+  myDeath: {fileID: 0}
 --- !u!1001 &2626788109702040190
 PrefabInstance:
   m_ObjectHideFlags: 0

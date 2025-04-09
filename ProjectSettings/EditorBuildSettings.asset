@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prefabs/Scenes/Congrats.unity
     guid: c627e24ba0f7fb54c9e3c8aac7afa2dd
+  - enabled: 1
+    path: Assets/Prefabs/Scenes/ConnectMii.unity
+    guid: 2498954f01675fa478dd92ced6105016
+  - enabled: 1
+    path: Assets/Prefabs/Scenes/Credits.unity
+    guid: 6b7f92bfeda9e12418abc13ec0bf1524
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

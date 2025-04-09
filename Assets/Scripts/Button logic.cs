@@ -34,8 +34,18 @@ public class Buttonlogic : MonoBehaviour
     {
         SceneManager.LoadScene(6);
     }
+
+    public void sendtoCredits()
+    {
+        SceneManager.LoadScene(8);
+    }
     public void retry()
     {
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuittheGame()
+    {
+        Application.Quit();
     }
 }

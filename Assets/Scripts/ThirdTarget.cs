@@ -5,10 +5,12 @@ public class ThirdTarget : MonoBehaviour
 {
     public MIInemumScore gameManager;
     public Animator flippingAnimator;
+    public AudioSource myDeath;
    
 
     void Start()
     {
+        myDeath = GetComponent<AudioSource>();
         gameObject.transform.eulerAngles = new Vector3 (0f, 0f, 90f);
         flippingAnimator = GetComponent<Animator>();    
         gameManager = FindFirstObjectByType<MIInemumScore>();
@@ -30,4 +32,6 @@ public class ThirdTarget : MonoBehaviour
         Destroy(gameObject);
        
     }
+
+  
 }

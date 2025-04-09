@@ -64,4 +64,6 @@ public class FirstTarget : BaseTarget
         gameManager.readyToFire = true;
         Destroy(gameObject);
     }
+
+
 }

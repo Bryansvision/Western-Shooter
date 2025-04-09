@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBehaviour: 0
+  myDeathSound: {fileID: 0}
   otherway: 1
   gameManager: {fileID: 0}
 --- !u!95 &2949267890069768605
